@@ -451,6 +451,7 @@ run-k8s-apiserver: stop-k8s-apiserver run-etcd vendor
 	# Wait until we can configure a cluster role binding which allows anonymous auth.
 	while ! docker exec st-apiserver kubectl create clusterrolebinding anonymous-admin --clusterrole=cluster-admin --user=system:anonymous; do echo "Trying to create ClusterRoleBinding"; sleep 2; done
 
+	sleep 10
 	# Create CustomResourceDefinition (CRD) for Calico resources
 	# from the manifest crds.yaml
 	docker run \
